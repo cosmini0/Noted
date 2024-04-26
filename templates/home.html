@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="hero">
+        <h1>Welcome to Your Notes App! 🚀</h1>
+        <p>Start capturing your ideas and thoughts effortlessly. ✨</p>
+        <a href="/new" class="cta-button">Create a New Note 🆕</a>
+    </div>
+
+    <section class="recent-notes">
+        <h2>Recent Notes 🔥</h2>
+        {% if recent_notes %}
+            <ul>
+                {% for note in recent_notes %}
+                    <li>
+                        <h3>📌 {{ note.title }}</h3>
+                        <p>{{ note.content[:100] }}{% if note.content|length > 100 %}...{% endif %}</p>
+                        <a href="/note/{{ loop.index0 }}">Read More 👉</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No recent notes found. 😴</p>
+        {% endif %}
+    </section>
+{% endblock %}

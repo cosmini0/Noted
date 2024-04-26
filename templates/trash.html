@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Trash{% endblock %}
+
+{% block content %}
+    <h1>🗑️ Trash</h1>
+    {% if deleted_notes %}
+        <ul class="trash-list">
+            {% for note in deleted_notes %}
+                <li>
+                    <h2>{{ note.title }}</h2>
+                    <p>{{ note.content }}</p>
+                    <form action="/restore" method="POST" class="restore-form">
+                        <input type="hidden" name="note_id" value="{{ loop.index0 }}">
+                        <button type="submit"><i class="fas fa-undo"></i> Restore</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>The trash is empty.</p>
+    {% endif %}
+{% endblock %}

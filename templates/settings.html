@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+    <h1>⚙️ Settings</h1>
+    <div class="settings-section">
+        <h2>Dark Mode</h2>
+        <form action="/settings" method="POST" id="dark-mode-form">
+            <label class="switch">
+                <input type="checkbox" name="dark_mode" {% if session.get('dark_mode') %}checked{% endif %} onchange="this.form.submit()">
+                <span class="slider round"></span>
+            </label>
+        </form>
+    </div>
+    <div class="settings-section">
+        <h2>Reset</h2>
+        <form action="/reset" method="POST" onsubmit="return confirm('Are you sure you want to delete all notes?');">
+            <button type="submit" class="danger-button">Delete All Notes</button>
+        </form>
+    </div>
+    <div class="settings-section">
+        <h2>Feedback</h2>
+        <form action="/feedback" method="POST">
+            <textarea name="feedback" placeholder="Enter your feedback"></textarea>
+            <button type="submit">Send Feedback</button>
+        </form>
+        {% if feedback_sent %}
+            <p>Feedback sent!</p>
+        {% endif %}
+    </div>
+{% endblock %}

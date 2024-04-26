@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Notes{% endblock %}
+
+{% block content %}
+    <h1>📚 Your Notes</h1>
+    <form action="/search" method="GET" class="search-form">
+        <input type="text" name="query" placeholder="Search notes...">
+        <button type="submit"><i class="fas fa-search"></i></button>
+    </form>
+    {% if notes %}
+        <ul class="note-list">
+            {% for note in notes %}
+                <li>
+                    <h2>{{ note.title }}</h2>
+                    <p>{{ note.content }}</p>
+                    <form action="/delete" method="POST" class="delete-form">
+                        <input type="hidden" name="note_id" value="{{ loop.index0 }}">
+                        <button type="submit"><i class="fas fa-trash"></i> Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No notes yet. <a href="/new">Create a new note</a>.</p>
+    {% endif %}
+{% endblock %}
