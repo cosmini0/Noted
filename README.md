@@ -9,6 +9,7 @@ Noted is a simple and intuitive note-taking application built with Flask. It all
 - Create notes with a title and content
 - Edit and delete existing notes
 - Responsive design for a seamless experience on any device
+- Search functionality for searching through the notes
 
 ## Installation
 
